@@ -1,0 +1,7 @@
+.dashboard-container {
+   box-sizing: border-box;
+} 
+  
+  .card {
+    margin-top: 20px;
+  }
