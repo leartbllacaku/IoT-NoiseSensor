@@ -29,7 +29,7 @@ Configure your environment variables and MongoDB connection settings. Update the
 
 1. **Install Python Libraries**
 
-    Ensure you have Node.js and npm installed on your machine. You can download and install them from [Download Node](nodejs.org).
+    Ensure you have Node.js and npm installed on your machine. You can download and install them from [Download Node](https://nodejs.org/en).
 
 2. **Install React Dependencies**
 
