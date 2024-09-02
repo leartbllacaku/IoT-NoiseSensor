@@ -1,82 +1,32 @@
+# server/app.py
 import sys
 import os
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-
-
-import webbrowser
-import threading
-
 # Add the database directory to the Python path
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'database')))
-# from config import get_db
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'database')))
+from config import get_db  # type: ignore # Import the get_db function
 
 app = Flask(__name__)
 CORS(app)
 
-
-# # Get MongoDB database
-# db = get_db()
+# Get MongoDB database
+db = get_db()
 
 @app.route('/')
 def home():
     return 'Hello, this is your noise monitoring dashboard!'
 
-#returns all data from the database 
-# ## need to change the collection name to the correct one
-# @app.route('/data')
-# def get_data():
-#     data = db.mycollection.find()
-#     return jsonify(list(data))
-
-@app.route('/dashboard')
-def dashboard():
-    dummy_data = {
-        'noise_levels': [40, 55, 70, 65, 80],
-        'timestamps': ['10:00', '10:15', '10:30', '10:45', '11:00'],
-        'status': "Normal"
-    }
-    return jsonify(dummy_data)
-
-@app.route('/api/noise-data')
-def get_noise_data():
-    data=[
-        {"timestamp": "10:00", "noise_level": 40},
-        {"timestamp": "10:02", "noise_level": 55},
-        {"timestamp": "10:04", "noise_level": 70},
-        {"timestamp": "10:06", "noise_level": 65},
-        {"timestamp": "10:08", "noise_level": 80},
-        {"timestamp": "10:10", "noise_level": 40},
-        {"timestamp": "10:12", "noise_level": 55},
-        {"timestamp": "10:14", "noise_level": 70},
-        {"timestamp": "10:16", "noise_level": 65},
-        {"timestamp": "10:18", "noise_level": 80},
-        {"timestamp": "10:20", "noise_level": 40},
-        {"timestamp": "10:22", "noise_level": 55},
-        {"timestamp": "10:24", "noise_level": 70},
-        {"timestamp": "10:26", "noise_level": 65},
-        {"timestamp": "10:28", "noise_level": 80},
-        {"timestamp": "10:30", "noise_level": 40},
-        { "timestamp": "10:32", "noise_level": 55},
-        {"timestamp": "10:34", "noise_level": 70},
-        {"timestamp": "10:36", "noise_level": 65},
-        {"timestamp": "10:38", "noise_level": 80},
-        {"timestamp": "10:40", "noise_level": 40},
-        {"timestamp": "10:42", "noise_level": 55},
-        {"timestamp": "10:44", "noise_level": 70},
-        {"timestamp": "10:46", "noise_level": 65},
-        {"timestamp": "10:48", "noise_level": 80},
-        {"timestamp": "10:50", "noise_level": 40},
-        {"timestamp": "10:52", "noise_level": 55},
-        {"timestamp": "10:54", "noise_level": 70},
-    ]
-    return jsonify(data)
-
-def open_browser():
-    webbrowser.open_new('http://localhost:3000')
+@app.route('/data')
+def get_data():
+    data = db.noise_data.find()
+    formatted_data = []
+    for entry in data:
+        entry['_id'] = str(entry['_id'])  # Convert ObjectId to string
+        entry['timestamp'] = entry['timestamp'].isoformat()  # Convert datetime to ISO 8601 string
+        formatted_data.append(entry)
+    return jsonify(formatted_data)
 
 if __name__ == '__main__':
-    threading.Timer(1, open_browser).start()  # Open the browser after 1 second
-    app.run(debug=True) 
+    app.run(debug=True)
