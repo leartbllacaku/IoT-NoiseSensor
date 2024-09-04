@@ -20,13 +20,12 @@ def home():
 
 @app.route('/data')
 def get_data():
-    data = db.noise_data.find()
-    formatted_data = []
-    for entry in data:
-        entry['_id'] = str(entry['_id'])  # Convert ObjectId to string
-        entry['timestamp'] = entry['timestamp'].isoformat()  # Convert datetime to ISO 8601 string
-        formatted_data.append(entry)
-    return jsonify(formatted_data)
+    # Fetch the most recent data entry
+    latest_entry = db.noise_data.find().sort('timestamp', -1).limit(1)
+    entry = latest_entry.next()
+    entry['_id'] = str(entry['_id'])  # Convert ObjectId to string
+    entry['timestamp'] = entry['timestamp'].isoformat()  # Convert datetime to ISO 8601 string
+    return jsonify(entry)
 
 if __name__ == '__main__':
     app.run(debug=True)
