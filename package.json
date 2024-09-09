@@ -5,10 +5,14 @@
   },
   "scripts": {
     "start": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "backend": "python server/app.py",
-    "frontend": "npm start --prefix frontend"
+    "backend": "cd server && python app.py",
+    "frontend": "cd frontend && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.4",
     "highcharts": "^11.4.7",
@@ -17,6 +21,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-scripts": "^5.0.1",
+    "socket.io-client": "^4.7.5",
     "web-vitals": "^4.2.3"
   }
 }
