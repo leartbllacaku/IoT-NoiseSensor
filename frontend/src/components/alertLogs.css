@@ -1,0 +1,52 @@
+.alert-log-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.alert-log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alert-log-header h2 {
+    margin: 0;
+}
+
+.alert-log-header button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: darkgray;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.alert-log-header button:hover {
+    background-color: gray;
+}
+
+.alerts-list {
+    margin-top: 20px;
+}
+
+.alert-item {
+    background-color: #f1f1f1;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.alert-item h4 {
+    margin: 0;
+    color: red;
+}
+
+.alert-item p {
+    margin: 5px 0;
+}
