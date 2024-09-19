@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar.jsx';
 import RealTimeChart from './components/realTimeChart.jsx';
 import AlertLogs from './components/alertLogs.jsx';
+import GrafanaDashboard from './components/grafanaDashboard.jsx';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<RealTimeChart />} />
             <Route path="/alerts" element={<AlertLogs />} />
+            <Route path="/alerts" element={<GrafanaDashboard />} />
           </Routes>
         </div>
       </div>

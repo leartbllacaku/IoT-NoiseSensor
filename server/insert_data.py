@@ -30,7 +30,7 @@ while current_time <= end_time:
     except Exception as e:
         print(f"Error inserting data: {e}")
 
-    time.sleep(10)  # Sleep for 10 seconds
+    time.sleep(1)  # Sleep for 10 seconds
 
     current_time += timedelta(minutes=1)
 

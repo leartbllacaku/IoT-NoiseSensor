@@ -44,12 +44,16 @@ def broadcast_data(data):
 @app.route('/trigger_realtime')
 def trigger_realtime():
     latest_data = db.noise_data.find().sort('timestamp', -1).limit(1)
+    data_sent = False
     for entry in latest_data:
         entry['_id'] = str(entry['_id'])  # Convert ObjectId to string
         entry['timestamp'] = entry['timestamp'].isoformat()  # Convert datetime to ISO 8601 string
         print('Fetched latest data:', entry)  # Debugging statement
         broadcast_data(entry)  # Emit the data to all connected clients
-    return jsonify({'message': 'Real-time data sent to clients!'})
+        data_sent = True
+    if not data_sent:
+        print('No data found to send!')
+    return jsonify({'message': 'Real-time data sent to clients!' if data_sent else 'No data found to send.'})
 
 @app.route('/insert_test_data', methods=['POST'])
 def insert_test_data():

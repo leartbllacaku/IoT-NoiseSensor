@@ -64,3 +64,22 @@ nav {
     font-size: 1.25rem;
     font-weight: 500;
 }
+
+.nav-button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.25rem;
+
+}
+
+.nav-button:hover {
+    color: #007bff;
+    border-radius: 5px; 
+}
