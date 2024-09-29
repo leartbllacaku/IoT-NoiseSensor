@@ -19,14 +19,14 @@ influxdb_org = os.getenv("INFLUXDB_ORG")
 influxdb_bucket = os.getenv("INFLUXDB_BUCKET")
 
 # MQTT broker details
-broker = "10.10.10.206"
-port = 1883
+broker = os.getenv("MQTT_BROKER")
+port = os.getenv("MQTT_PORT")
 
 # # InfluxDB details
-# influxdb_url = "http://localhost:8086"
-# influxdb_token = "Ph0Y7mUDYUCHsq2-XD24N1xOZ6SP5nWth7Da0rVZq8_Yih3twTaHG5gcWAcotzKvX24f8axAiTk5qq-dGgIImA==" 
-# influxdb_org = "91Life"
-# influxdb_bucket = "noise_sensor"
+# influxdb_url = "http://localhost:****"
+# influxdb_token = "token"
+# influxdb_org = "org name"
+# influxdb_bucket = "bucket name"
 
 # Create a new InfluxDB client instance
 influx_client = InfluxDBClient(url=influxdb_url, token=influxdb_token, org=influxdb_org)
