@@ -17,6 +17,7 @@ To run this application locally, you'll need to set up both the backend and fron
    ```bash
    pip install pymongo flask flask_cors
 
+
 2. **Configuration**
 
 Configure your environment variables and MongoDB connection settings. Update the config.py file or your chosen configuration method with the following details:
@@ -38,9 +39,40 @@ Configure your environment variables and MongoDB connection settings. Update the
    ```bash
      npm install
 
-## Running the Application
-Open terminal in project directory and run the command:
-  ```bash
-    npm start
+3. **Running the application**
+
+   Navigate to the project directory, and run the command below:
+
+   ```bash
+     npm start
+   
+### Important Notes ###
+   1. Ensure the Flask server is always running to save the data received from the Raspberry Pi.
+   2. The Raspberry Pi must be connected to the internet to send data to the server.
+
+
+## Update
+We have switched from MongoDB to InfluxDB for storing noise data. You will need to have InfluxDB set up for the system to work. You can do this using Docker or Powershell:
+
+- **Docker Setup:** Set up an InfluxDB instance using Docker by following the official InfluxDB Docker documentation.
+  
+- **Powershell Setup:** Alternatively, you can install InfluxDB natively through Powershell.
+
+The system includes an `mqtt_subscriber.py` script that retrieves data from the Raspberry Pi and stores it in the InfluxDB database. It communicates with the Raspberry Pi using the SSH protocol.
+
+For visualization, Grafana is used to display the data in real-time on a dashboard.
+
+### Required Installations:
+1. **InfluxDB** (Set up using Docker or locally)
+2. **Grafana** (For data visualization)
+3. **MQTT Broker** (To handle message transfers between the Raspberry Pi and the backend)
+4. **Python Libraries:** `influxdb-client`, `paramiko` (for SSH communication)
+
+Ensure these are installed and correctly configured to ensure the system works seamlessly.
+
+
+
+
+
 
 
